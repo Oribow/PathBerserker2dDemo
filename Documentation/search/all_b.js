@@ -13,6 +13,7 @@ var searchData=
   ['navsegmenttags_62',['NavSegmentTags',['../classPathBerserker2d_1_1PathBerserker2dSettings.html#a87c3108a77011aaa78b4e61bd261aed1',1,'PathBerserker2d::PathBerserker2dSettings']]],
   ['navsubsegmentpointer_63',['NavSubsegmentPointer',['../structPathBerserker2d_1_1NavSubsegmentPointer.html',1,'PathBerserker2d']]],
   ['navsurface_64',['NavSurface',['../classPathBerserker2d_1_1NavSurface.html',1,'PathBerserker2d']]],
-  ['nextsegmentnormal_65',['NextSegmentNormal',['../classPathBerserker2d_1_1NavAgent.html#ac799632674a83614c4377e7586d5aa15',1,'PathBerserker2d::NavAgent']]],
-  ['nextsubgoal_66',['NextSubGoal',['../classPathBerserker2d_1_1Path.html#ad3acbf0f05504243e3d8f86510dc827e',1,'PathBerserker2d::Path']]]
+  ['navtag_65',['navTag',['../classPathBerserker2d_1_1BaseNavLink.html#ac97b23a59edf0f4a41a0831bc88a5694',1,'PathBerserker2d::BaseNavLink']]],
+  ['nextsegmentnormal_66',['NextSegmentNormal',['../classPathBerserker2d_1_1NavAgent.html#ac799632674a83614c4377e7586d5aa15',1,'PathBerserker2d::NavAgent']]],
+  ['nextsubgoal_67',['NextSubGoal',['../classPathBerserker2d_1_1Path.html#ad3acbf0f05504243e3d8f86510dc827e',1,'PathBerserker2d::Path']]]
 ];
