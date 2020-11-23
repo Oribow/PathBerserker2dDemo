@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['navtag_186',['navTag',['../classPathBerserker2d_1_1BaseNavLink.html#ac97b23a59edf0f4a41a0831bc88a5694',1,'PathBerserker2d::BaseNavLink']]],
-  ['nextsegmentnormal_187',['NextSegmentNormal',['../classPathBerserker2d_1_1NavAgent.html#ac799632674a83614c4377e7586d5aa15',1,'PathBerserker2d::NavAgent']]]
+  ['isongoalsegment_203',['IsOnGoalSegment',['../classPathBerserker2d_1_1NavAgent.html#a573cf691313a8d5ff634fceef9d36f4f',1,'PathBerserker2d::NavAgent']]],
+  ['isonsegment_204',['IsOnSegment',['../classPathBerserker2d_1_1NavAgent.html#a327bfbc285211b1a0f73fbe597823303',1,'PathBerserker2d::NavAgent']]],
+  ['isstopping_205',['IsStopping',['../classPathBerserker2d_1_1NavAgent.html#a154465868766706dd2284eecb2125ffa',1,'PathBerserker2d::NavAgent']]]
 ];

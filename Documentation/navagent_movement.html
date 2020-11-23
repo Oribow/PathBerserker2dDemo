@@ -86,255 +86,336 @@ $(function() {
  Much like climb, except that the agent does not move on the y axis on its own, but instead waits for the elevator to bring it to the correct y level.</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md8"></a>
+How to override the build-in movement</h1>
+<p>You have 2 options to override the build-in movement. You can turn it off completly, or override and extend it. To turn off auto link or segment movement completly uncheck "Auto Segment Movement" and/or "Auto Link Movement" on the NavAgent. This will prevent the NavAgent from ever using the DefaultMovementHandler to move around. You now have to implement every movement your self.</p>
+<h1><a class="anchor" id="autotoc_md9"></a>
+Movement Handler Template</h1>
+<p>Use this as a starting point for your own movement implementation. Works with partial and total override fo the default movement system.</p>
+<div class="fragment"><div class="line"><span class="keyword">using</span> <a class="code" href="namespacePathBerserker2d.html">PathBerserker2d</a>;</div>
+<div class="line"><span class="keyword">using</span> UnityEngine;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">public</span> <span class="keyword">class </span>BareMovementHandler : MonoBehaviour</div>
+<div class="line">{</div>
+<div class="line">    [SerializeField]</div>
+<div class="line">    NavAgent agent;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keywordtype">void</span> Start()</div>
+<div class="line">    {</div>
+<div class="line">        <span class="comment">// register call backs</span></div>
+<div class="line">        agent.OnStartLinkTraversal += Agent_OnStartLinkTraversal;</div>
+<div class="line">        agent.OnLinkTraversal += Agent_OnLinkTraversal;</div>
+<div class="line"> </div>
+<div class="line">        agent.OnStartSegmentTraversal += Agent_OnStartSegmentTraversal;</div>
+<div class="line">        agent.OnSegmentTraversal += Agent_OnSegmentTraversal;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">private</span> <span class="keywordtype">void</span> Agent_OnStartLinkTraversal(NavAgent obj)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="comment">// initialize link movement here if necessary</span></div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">private</span> <span class="keywordtype">void</span> Agent_OnLinkTraversal(MovementEventArgs obj)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="comment">// move the agent along the current link</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// get the links start and end point like this</span></div>
+<div class="line">        Vector2 linkStart = obj.Source.CurrentLinkStart;</div>
+<div class="line">        Vector2 linkEnd = obj.Source.PathSubGoal;</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// get the current link type and decide how to handle it</span></div>
+<div class="line">        <span class="keywordtype">string</span> linkType = obj.Source.CurrentLinkType;</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// if you don&#39;t have autoLinkMovement disabled on the agent,</span></div>
+<div class="line">        <span class="comment">// call this to prevent the default movement handler from moving the agent. </span></div>
+<div class="line">        <span class="comment">// you can also choose not to call this, if you want to fall back to the default movement handler.</span></div>
+<div class="line">        obj.PreventDefault();</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// once the agent has reached the links destination, call this to let it know. The agent will not stop traversing this link, until you call it.</span></div>
+<div class="line">        <span class="keywordflow">if</span> (reached_goal)</div>
+<div class="line">            agent.CompleteLinkTraversal();</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">private</span> <span class="keywordtype">void</span> Agent_OnStartSegmentTraversal(NavAgent obj)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="comment">// initialize segment movement here if necessary</span></div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">private</span> <span class="keywordtype">void</span> Agent_OnSegmentTraversal(MovementEventArgs obj)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="comment">// move agent along a segment</span></div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// get agents position</span></div>
+<div class="line">        Vector2 start = obj.Source.Position;</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// get segment end point like this</span></div>
+<div class="line">        Vector2 end = obj.Source.PathSubGoal;</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// if you don&#39;t have autoSegmentMovement disabled on the agent,</span></div>
+<div class="line">        <span class="comment">// call this to prevent the default movement handler from moving the agent. </span></div>
+<div class="line">        <span class="comment">// you can also choose not to call this, if you want to fall back to the default movement handler.</span></div>
+<div class="line">        obj.PreventDefault();</div>
+<div class="line"> </div>
+<div class="line">        <span class="comment">// once the agent has reached the segments destination, call this to let it know. The agent will not stop traversing this segment, until you call it.</span></div>
+<div class="line">        <span class="keywordflow">if</span> (reached_goal)</div>
+<div class="line">            agent.CompleteSegmentTraversal();</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md10"></a>
 Complete code</h1>
 <p>What follows is the complete movement code that the NavAgent uses. This code is normally hidden inside the dll, but it is included here to give you an idea on how to code your own movement for the agent. It is also a good reference, if you ever wonder why an Agent is moving like it is.</p>
-<div class="fragment"><div class="line"><span class="keyword">internal</span> <span class="keyword">class </span>DefaultMovementHandler</div>
+<div class="fragment"><div class="line"><span class="keyword">public</span> <span class="keyword">class </span>DefaultMovementHandler</div>
+<div class="line">{</div>
+<div class="line">    <span class="keyword">private</span> <span class="keywordtype">float</span> timeOnLink;</div>
+<div class="line">    <span class="keyword">private</span> <span class="keywordtype">float</span> timeToCompleteLink;</div>
+<div class="line">    <span class="keyword">private</span> Vector2 direction;</div>
+<div class="line">    <span class="keyword">private</span> <span class="keywordtype">int</span> state = 0;</div>
+<div class="line">    <span class="keyword">private</span> Transform elevatorTrans;</div>
+<div class="line">    <span class="keyword">private</span> <span class="keywordtype">float</span> deltaDistance;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">public</span> DefaultMovementHandler(NavAgent agent)</div>
 <div class="line">    {</div>
-<div class="line">        <span class="keyword">private</span> <span class="keywordtype">float</span> timeOnLink;</div>
-<div class="line">        <span class="keyword">private</span> <span class="keywordtype">float</span> timeToCompleteLink;</div>
-<div class="line">        <span class="keyword">private</span> Vector2 direction;</div>
-<div class="line">        <span class="keyword">private</span> <span class="keywordtype">int</span> state = 0;</div>
-<div class="line">        <span class="keyword">private</span> Transform elevatorTrans;</div>
-<div class="line">        <span class="keyword">private</span> <span class="keywordtype">float</span> deltaDistance;</div>
+<div class="line">        agent.OnStartLinkTraversal += Agent_StartLinkTraversalEvent;</div>
+<div class="line">    }</div>
 <div class="line"> </div>
-<div class="line">        <span class="keyword">public</span> DefaultMovementHandler(NavAgent agent)</div>
+<div class="line">    <span class="keyword">private</span> <span class="keywordtype">void</span> Agent_StartLinkTraversalEvent(NavAgent agent)</div>
+<div class="line">    {</div>
+<div class="line">        timeOnLink = 0;</div>
+<div class="line">        Vector2 delta = agent.PathSubGoal - agent.CurrentLinkStart;</div>
+<div class="line">        deltaDistance = delta.magnitude;</div>
+<div class="line">        direction = delta / deltaDistance;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordtype">float</span> speed = 1;</div>
+<div class="line">        <span class="keywordflow">switch</span> (agent.CurrentLinkType)</div>
 <div class="line">        {</div>
-<div class="line">            agent.OnStartLinkTraversal += Agent_StartLinkTraversalEvent;</div>
-<div class="line">        }</div>
-<div class="line"> </div>
-<div class="line">        <span class="keyword">private</span> <span class="keywordtype">void</span> Agent_StartLinkTraversalEvent(NavAgent agent)</div>
-<div class="line">        {</div>
-<div class="line">            timeOnLink = 0;</div>
-<div class="line">            Vector2 delta = agent.PathSubGoal - agent.CurrentLinkStart;</div>
-<div class="line">            deltaDistance = delta.magnitude;</div>
-<div class="line">            direction = delta / deltaDistance;</div>
-<div class="line"> </div>
-<div class="line">            <span class="keywordtype">float</span> speed = 1;</div>
-<div class="line">            <span class="keywordflow">switch</span> (agent.CurrentLinkType)</div>
-<div class="line">            {</div>
-<div class="line">                <span class="keywordflow">case</span> <span class="stringliteral">&quot;corner&quot;</span>:</div>
-<div class="line">                    speed = agent.cornerSpeed;</div>
-<div class="line">                    deltaDistance = agent.CurrentLink.TravelCosts(Vector2.zero, Vector2.zero);</div>
+<div class="line">            <span class="keywordflow">case</span> <span class="stringliteral">&quot;corner&quot;</span>:</div>
+<div class="line">                <span class="keywordflow">if</span> (!agent.enableAgentRotation)</div>
+<div class="line">                {</div>
+<div class="line">                    agent.CompleteLinkTraversal();</div>
 <div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">case</span> <span class="stringliteral">&quot;fall&quot;</span>:</div>
-<div class="line">                    speed = agent.fallSpeed;</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">case</span> <span class="stringliteral">&quot;climb&quot;</span>:</div>
-<div class="line">                    speed = agent.climbSpeed;</div>
+<div class="line">                }</div>
+<div class="line">                speed = agent.cornerSpeed;</div>
+<div class="line">                deltaDistance = agent.CurrentLink.TravelCosts(Vector2.zero, Vector2.zero);</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">            <span class="keywordflow">case</span> <span class="stringliteral">&quot;fall&quot;</span>:</div>
+<div class="line">                speed = agent.fallSpeed;</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">            <span class="keywordflow">case</span> <span class="stringliteral">&quot;climb&quot;</span>:</div>
+<div class="line">                speed = agent.climbSpeed;</div>
 <div class="line"> </div>
-<div class="line">                    <span class="comment">// overwrite delta distance</span></div>
-<div class="line">                    Vector2 ladderPos = agent.CurrentLink.GameObject.transform.position;</div>
-<div class="line">                    deltaDistance = Mathf.Abs(ladderPos.x - agent.CurrentLinkStart.x) + Mathf.Abs(delta.y) + Mathf.Abs(ladderPos.x - agent.PathSubGoal.x);</div>
+<div class="line">                <span class="comment">// overwrite delta distance</span></div>
+<div class="line">                Vector2 ladderPos = agent.CurrentLink.GameObject.transform.position;</div>
+<div class="line">                deltaDistance = Mathf.Abs(ladderPos.x - agent.CurrentLinkStart.x) + Mathf.Abs(delta.y) + Mathf.Abs(ladderPos.x - agent.PathSubGoal.x);</div>
 <div class="line"> </div>
-<div class="line">                    direction = Vector2.right * Mathf.Sign(ladderPos.x - agent.CurrentLinkStart.x);</div>
-<div class="line">                    state = 0;</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">case</span> <span class="stringliteral">&quot;jump&quot;</span>:</div>
-<div class="line">                    speed = agent.jumpSpeed;</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">case</span> <span class="stringliteral">&quot;elevator&quot;</span>:</div>
-<div class="line">                    speed = agent.movementSpeed;</div>
-<div class="line">                    state = 0;</div>
-<div class="line">                    elevatorTrans = agent.CurrentLink.GameObject.transform;</div>
-<div class="line">                    var childTrans = agent.CurrentLink.GameObject.GetComponentsInChildren&lt;Transform&gt;();</div>
-<div class="line">                    <span class="keywordflow">foreach</span> (var t <span class="keywordflow">in</span> childTrans)</div>
+<div class="line">                direction = Vector2.right * Mathf.Sign(ladderPos.x - agent.CurrentLinkStart.x);</div>
+<div class="line">                state = 0;</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">            <span class="keywordflow">case</span> <span class="stringliteral">&quot;jump&quot;</span>:</div>
+<div class="line">                speed = agent.jumpSpeed;</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">            <span class="keywordflow">case</span> <span class="stringliteral">&quot;elevator&quot;</span>:</div>
+<div class="line">                speed = agent.movementSpeed;</div>
+<div class="line">                state = 0;</div>
+<div class="line">                elevatorTrans = agent.CurrentLink.GameObject.transform;</div>
+<div class="line">                var childTrans = agent.CurrentLink.GameObject.GetComponentsInChildren&lt;Transform&gt;();</div>
+<div class="line">                <span class="keywordflow">foreach</span> (var t <span class="keywordflow">in</span> childTrans)</div>
+<div class="line">                {</div>
+<div class="line">                    <span class="keywordflow">if</span> (t.gameObject.layer == 8)</div>
 <div class="line">                    {</div>
-<div class="line">                        <span class="keywordflow">if</span> (t.gameObject.layer == 8)</div>
-<div class="line">                        {</div>
-<div class="line">                            elevatorTrans = t;</div>
-<div class="line">                            <span class="keywordflow">break</span>;</div>
-<div class="line">                        }</div>
+<div class="line">                        elevatorTrans = t;</div>
+<div class="line">                        <span class="keywordflow">break</span>;</div>
 <div class="line">                    }</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">            }</div>
-<div class="line"> </div>
-<div class="line">            <span class="keywordflow">if</span> (agent.CurrentLinkType == <span class="stringliteral">&quot;elevator&quot;</span>)</div>
-<div class="line">                timeToCompleteLink = <span class="keywordtype">float</span>.PositiveInfinity;</div>
-<div class="line">            <span class="keywordflow">else</span></div>
-<div class="line">                timeToCompleteLink = (deltaDistance / speed);</div>
+<div class="line">                }</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
 <div class="line">        }</div>
 <div class="line"> </div>
-<div class="line">        <span class="keyword">public</span> <span class="keywordtype">void</span> MoveOnSegment(NavAgent agent)</div>
+<div class="line">        <span class="keywordflow">if</span> (agent.CurrentLinkType == <span class="stringliteral">&quot;elevator&quot;</span>)</div>
+<div class="line">            timeToCompleteLink = <span class="keywordtype">float</span>.PositiveInfinity;</div>
+<div class="line">        <span class="keywordflow">else</span></div>
+<div class="line">            timeToCompleteLink = (deltaDistance / speed);</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">public</span> <span class="keywordtype">void</span> MoveOnSegment(NavAgent agent)</div>
+<div class="line">    {</div>
+<div class="line">        Vector2 delta = agent.PathSubGoal - agent.Position;</div>
+<div class="line">        <span class="keywordtype">float</span> distance = delta.magnitude;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (distance &lt;= 0.05f)</div>
 <div class="line">        {</div>
-<div class="line">            Vector2 delta = agent.PathSubGoal - agent.Position;</div>
-<div class="line">            <span class="keywordtype">float</span> distance = delta.magnitude;</div>
-<div class="line"> </div>
-<div class="line">            <span class="keywordflow">if</span> (distance &lt;= 0.01f)</div>
-<div class="line">            {</div>
-<div class="line">                agent.CompleteSegmentTraversal();</div>
-<div class="line">            }</div>
-<div class="line"> </div>
-<div class="line">            delta.Normalize();</div>
-<div class="line">            <span class="keywordtype">float</span> maxMovDist = Time.deltaTime * agent.movementSpeed;</div>
-<div class="line"> </div>
-<div class="line">            <span class="keywordflow">if</span> (distance &lt;= maxMovDist)</div>
-<div class="line">            {</div>
-<div class="line">                agent.transform.Translate(delta * distance, Space.World);</div>
-<div class="line">            }</div>
-<div class="line">            <span class="keywordflow">else</span></div>
-<div class="line">            {</div>
-<div class="line">                agent.transform.Translate(delta * Time.deltaTime * agent.movementSpeed, Space.World);</div>
-<div class="line">            }</div>
+<div class="line">            agent.CompleteSegmentTraversal();</div>
 <div class="line">        }</div>
 <div class="line"> </div>
-<div class="line">        <span class="keyword">public</span> <span class="keywordtype">void</span> MoveOnLink(NavAgent agent, INavLinkInstance link)</div>
+<div class="line">        delta.Normalize();</div>
+<div class="line">        <span class="keywordtype">float</span> maxMovDist = Time.deltaTime * agent.movementSpeed;</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (distance &lt;= maxMovDist)</div>
 <div class="line">        {</div>
-<div class="line">            timeOnLink += Time.deltaTime;</div>
-<div class="line">            timeOnLink = Mathf.Min(timeToCompleteLink, timeOnLink);</div>
-<div class="line"> </div>
-<div class="line">            <span class="keywordflow">switch</span> (agent.CurrentLinkType)</div>
-<div class="line">            {</div>
-<div class="line">                <span class="keywordflow">case</span> <span class="stringliteral">&quot;corner&quot;</span>:</div>
-<div class="line">                    Corner(agent);</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">case</span> <span class="stringliteral">&quot;jump&quot;</span>:</div>
-<div class="line">                    Jump(agent);</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">case</span> <span class="stringliteral">&quot;fall&quot;</span>:</div>
-<div class="line">                    Fall(agent);</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">case</span> <span class="stringliteral">&quot;teleport&quot;</span>:</div>
-<div class="line">                    Teleport(agent);</div>
-<div class="line">                    timeOnLink = timeToCompleteLink + 1;</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">case</span> <span class="stringliteral">&quot;climb&quot;</span>:</div>
-<div class="line">                    Climb(agent);</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">case</span> <span class="stringliteral">&quot;elevator&quot;</span>:</div>
-<div class="line">                    Elevator(agent);</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">default</span>:</div>
-<div class="line">                    Jump(agent);</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">            }</div>
-<div class="line"> </div>
-<div class="line">            <span class="keywordflow">if</span> (timeOnLink &gt;= timeToCompleteLink)</div>
-<div class="line">            {</div>
-<div class="line">                agent.CompleteLinkTraversal();</div>
-<div class="line">                <span class="keywordflow">return</span>;</div>
-<div class="line">            }</div>
+<div class="line">            agent.transform.Translate(delta * distance, Space.World);</div>
 <div class="line">        }</div>
-<div class="line"> </div>
-<div class="line">        <span class="keyword">private</span> <span class="keywordtype">void</span> Corner(NavAgent agent)</div>
+<div class="line">        <span class="keywordflow">else</span></div>
 <div class="line">        {</div>
-<div class="line">            var from = Quaternion.LookRotation(Vector3.forward, agent.CurrentSegmentNormal);</div>
-<div class="line">            var to = Quaternion.LookRotation(Vector3.forward, agent.NextSegmentNormal);</div>
-<div class="line"> </div>
-<div class="line"> </div>
-<div class="line">            agent.transform.rotation = Quaternion.Slerp(</div>
-<div class="line">                from,</div>
-<div class="line">                to,</div>
-<div class="line">                agent.TimeOnLink / (deltaDistance / agent.cornerSpeed));</div>
-<div class="line">        }</div>
-<div class="line"> </div>
-<div class="line">        <span class="keyword">private</span> <span class="keywordtype">void</span> Jump(NavAgent agent)</div>
-<div class="line">        {</div>
-<div class="line">            Vector2 newPos = agent.CurrentLinkStart + direction * timeOnLink * agent.jumpSpeed;</div>
-<div class="line">            newPos.y += deltaDistance * 0.3f * Mathf.Sin(Mathf.PI * timeOnLink / timeToCompleteLink);</div>
-<div class="line">            agent.Position = newPos;</div>
-<div class="line">        }</div>
-<div class="line"> </div>
-<div class="line">        <span class="keyword">private</span> <span class="keywordtype">void</span> Fall(NavAgent agent)</div>
-<div class="line">        {</div>
-<div class="line">            Vector2 newPos = agent.CurrentLinkStart + direction * timeOnLink * agent.fallSpeed;</div>
-<div class="line">            agent.Position = newPos;</div>
-<div class="line">        }</div>
-<div class="line"> </div>
-<div class="line">        <span class="keyword">private</span> <span class="keywordtype">void</span> Climb(NavAgent agent)</div>
-<div class="line">        {</div>
-<div class="line">            <span class="comment">// 3 phase</span></div>
-<div class="line">            <span class="comment">// 1. adjust x to meet ladder</span></div>
-<div class="line">            <span class="comment">// 2. adjust y to meet destination</span></div>
-<div class="line">            <span class="comment">// 3. adjust x to meet destination</span></div>
-<div class="line"> </div>
-<div class="line">            Vector2 newPos = Vector2.zero;</div>
-<div class="line">            <span class="keywordflow">switch</span> (state)</div>
-<div class="line">            {</div>
-<div class="line">                <span class="keywordflow">case</span> 0:</div>
-<div class="line">                    newPos = agent.Position + agent.climbSpeed * direction * Time.deltaTime;</div>
-<div class="line"> </div>
-<div class="line">                    <span class="keywordtype">float</span> targetX = agent.CurrentLink.GameObject.transform.position.x;</div>
-<div class="line">                    <span class="keywordflow">if</span> ((newPos.x - targetX) * direction.x &gt;= 0)</div>
-<div class="line">                    {</div>
-<div class="line">                        state = 1;</div>
-<div class="line">                        newPos.x = targetX;</div>
-<div class="line">                        direction = Vector2.up * Mathf.Sign(agent.CurrentLink.GameObject.transform.position.y - newPos.y);</div>
-<div class="line">                    }</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">case</span> 1:</div>
-<div class="line">                    newPos = agent.Position + agent.climbSpeed * direction * Time.deltaTime;</div>
-<div class="line"> </div>
-<div class="line">                    <span class="keywordtype">float</span> targetY = agent.PathSubGoal.y;</div>
-<div class="line">                    <span class="keywordflow">if</span> ((newPos.y - targetY) * direction.y &gt;= 0)</div>
-<div class="line">                    {</div>
-<div class="line">                        state = 2;</div>
-<div class="line">                        newPos.y = targetY;</div>
-<div class="line">                        direction = Vector2.right * Mathf.Sign(agent.PathSubGoal.x - newPos.x);</div>
-<div class="line">                    }</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">case</span> 2:</div>
-<div class="line">                    newPos = agent.Position + agent.climbSpeed * direction * Time.deltaTime;</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">            }</div>
-<div class="line">            agent.Position = newPos;</div>
-<div class="line">        }</div>
-<div class="line"> </div>
-<div class="line">        <span class="keyword">private</span> <span class="keywordtype">void</span> Elevator(NavAgent agent)</div>
-<div class="line">        {</div>
-<div class="line">            <span class="comment">// 3 phase</span></div>
-<div class="line">            <span class="comment">// 1. move on elevator</span></div>
-<div class="line">            <span class="comment">// 2. wait to reach destination</span></div>
-<div class="line">            <span class="comment">// 3. leave</span></div>
-<div class="line"> </div>
-<div class="line">            Vector2 newPos = agent.Position;</div>
-<div class="line">            <span class="keywordflow">switch</span> (state)</div>
-<div class="line">            {</div>
-<div class="line">                <span class="keywordflow">case</span> 0:</div>
-<div class="line">                    Vector2 target = elevatorTrans.position;</div>
-<div class="line">                    <span class="keywordflow">if</span> (agent.CurrentLink.IsTraversable &amp;&amp; Mathf.Abs(newPos.y - target.y) &lt; 0.1f)</div>
-<div class="line">                    {</div>
-<div class="line">                        state = 1;</div>
-<div class="line">                        newPos.y = target.y;</div>
-<div class="line">                        direction = Vector2.right * Mathf.Sign(target.x - agent.CurrentLinkStart.x);</div>
-<div class="line">                    }</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">case</span> 1:</div>
-<div class="line">                    newPos += agent.movementSpeed * direction * Time.deltaTime;</div>
-<div class="line"> </div>
-<div class="line">                    <span class="keywordtype">float</span> targetX = agent.CurrentLink.GameObject.transform.position.x;</div>
-<div class="line">                    <span class="keywordflow">if</span> ((newPos.x - targetX) * direction.x &gt;= 0)</div>
-<div class="line">                    {</div>
-<div class="line">                        state = 2;</div>
-<div class="line">                        newPos.x = targetX;</div>
-<div class="line">                    }</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">case</span> 2:</div>
-<div class="line">                    <span class="comment">// wait till y matches elevation</span></div>
-<div class="line">                    <span class="comment">// cast ray downwards to move with platform</span></div>
-<div class="line">                    <span class="keywordtype">float</span> targetY = agent.PathSubGoal.y;</div>
-<div class="line">                    <span class="keywordflow">if</span> (agent.CurrentLink.IsTraversable &amp;&amp; Mathf.Abs(newPos.y - targetY) &lt; 0.1f)</div>
-<div class="line">                    {</div>
-<div class="line">                        state = 3;</div>
-<div class="line">                        newPos.y = targetY;</div>
-<div class="line">                        direction = Vector2.right * Mathf.Sign(agent.PathSubGoal.x - newPos.x);</div>
-<div class="line">                        timeOnLink = 0;</div>
-<div class="line">                        timeToCompleteLink = Mathf.Abs(agent.PathSubGoal.x - newPos.x) / agent.movementSpeed;</div>
-<div class="line">                    }</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">                <span class="keywordflow">case</span> 3:</div>
-<div class="line">                    newPos += agent.movementSpeed * direction * Time.deltaTime;</div>
-<div class="line">                    <span class="keywordflow">break</span>;</div>
-<div class="line">            }</div>
-<div class="line">            agent.Position = newPos;</div>
-<div class="line">        }</div>
-<div class="line"> </div>
-<div class="line">        <span class="keyword">private</span> <span class="keywordtype">void</span> Teleport(NavAgent agent)</div>
-<div class="line">        {</div>
-<div class="line">            agent.Position = agent.PathSubGoal;</div>
+<div class="line">            agent.transform.Translate(delta * Time.deltaTime * agent.movementSpeed, Space.World);</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">public</span> <span class="keywordtype">void</span> MoveOnLink(NavAgent agent, INavLinkInstance link)</div>
+<div class="line">    {</div>
+<div class="line">        timeOnLink += Time.deltaTime;</div>
+<div class="line">        timeOnLink = Mathf.Min(timeToCompleteLink, timeOnLink);</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">switch</span> (agent.CurrentLinkType)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">case</span> <span class="stringliteral">&quot;corner&quot;</span>:</div>
+<div class="line">                Corner(agent);</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">            <span class="keywordflow">case</span> <span class="stringliteral">&quot;jump&quot;</span>:</div>
+<div class="line">                Jump(agent);</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">            <span class="keywordflow">case</span> <span class="stringliteral">&quot;fall&quot;</span>:</div>
+<div class="line">                Fall(agent);</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">            <span class="keywordflow">case</span> <span class="stringliteral">&quot;teleport&quot;</span>:</div>
+<div class="line">                Teleport(agent);</div>
+<div class="line">                timeOnLink = timeToCompleteLink + 1;</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">            <span class="keywordflow">case</span> <span class="stringliteral">&quot;climb&quot;</span>:</div>
+<div class="line">                Climb(agent);</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">            <span class="keywordflow">case</span> <span class="stringliteral">&quot;elevator&quot;</span>:</div>
+<div class="line">                Elevator(agent);</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">            <span class="keywordflow">default</span>:</div>
+<div class="line">                Jump(agent);</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">        }</div>
+<div class="line"> </div>
+<div class="line">        <span class="keywordflow">if</span> (timeOnLink &gt;= timeToCompleteLink)</div>
+<div class="line">        {</div>
+<div class="line">            agent.CompleteLinkTraversal();</div>
+<div class="line">            <span class="keywordflow">return</span>;</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">private</span> <span class="keywordtype">void</span> Corner(NavAgent agent)</div>
+<div class="line">    {</div>
+<div class="line">        var from = Quaternion.LookRotation(Vector3.forward, agent.CurrentSegmentNormal);</div>
+<div class="line">        var to = Quaternion.LookRotation(Vector3.forward, agent.NextSegmentNormal);</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line">        agent.transform.rotation = Quaternion.Slerp(</div>
+<div class="line">            from,</div>
+<div class="line">            to,</div>
+<div class="line">            agent.TimeOnLink / (deltaDistance / agent.cornerSpeed));</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">private</span> <span class="keywordtype">void</span> Jump(NavAgent agent)</div>
+<div class="line">    {</div>
+<div class="line">        Vector2 newPos = agent.CurrentLinkStart + direction * timeOnLink * agent.jumpSpeed;</div>
+<div class="line">        newPos.y += deltaDistance * 0.3f * Mathf.Sin(Mathf.PI * timeOnLink / timeToCompleteLink);</div>
+<div class="line">        agent.Position = newPos;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">private</span> <span class="keywordtype">void</span> Fall(NavAgent agent)</div>
+<div class="line">    {</div>
+<div class="line">        Vector2 newPos = agent.CurrentLinkStart + direction * timeOnLink * agent.fallSpeed;</div>
+<div class="line">        agent.Position = newPos;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">private</span> <span class="keywordtype">void</span> Climb(NavAgent agent)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="comment">// 3 phase</span></div>
+<div class="line">        <span class="comment">// 1. adjust x to meet ladder</span></div>
+<div class="line">        <span class="comment">// 2. adjust y to meet destination</span></div>
+<div class="line">        <span class="comment">// 3. adjust x to meet destination</span></div>
+<div class="line"> </div>
+<div class="line">        Vector2 newPos = Vector2.zero;</div>
+<div class="line">        <span class="keywordflow">switch</span> (state)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">case</span> 0:</div>
+<div class="line">                newPos = agent.Position + agent.climbSpeed * direction * Time.deltaTime;</div>
+<div class="line"> </div>
+<div class="line">                <span class="keywordtype">float</span> targetX = agent.CurrentLink.GameObject.transform.position.x;</div>
+<div class="line">                <span class="keywordflow">if</span> ((newPos.x - targetX) * direction.x &gt;= 0)</div>
+<div class="line">                {</div>
+<div class="line">                    state = 1;</div>
+<div class="line">                    newPos.x = targetX;</div>
+<div class="line">                    direction = Vector2.up * Mathf.Sign(agent.PathSubGoal.y - newPos.y);</div>
+<div class="line">                }</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">            <span class="keywordflow">case</span> 1:</div>
+<div class="line">                newPos = agent.Position + agent.climbSpeed * direction * Time.deltaTime;</div>
+<div class="line"> </div>
+<div class="line">                <span class="keywordtype">float</span> targetY = agent.PathSubGoal.y;</div>
+<div class="line">                <span class="keywordflow">if</span> ((newPos.y - targetY) * direction.y &gt;= 0)</div>
+<div class="line">                {</div>
+<div class="line">                    state = 2;</div>
+<div class="line">                    newPos.y = targetY;</div>
+<div class="line">                    direction = Vector2.right * Mathf.Sign(agent.PathSubGoal.x - newPos.x);</div>
+<div class="line">                }</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">            <span class="keywordflow">case</span> 2:</div>
+<div class="line">                newPos = agent.Position + agent.climbSpeed * direction * Time.deltaTime;</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">        }</div>
+<div class="line">        agent.Position = newPos;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">private</span> <span class="keywordtype">void</span> Elevator(NavAgent agent)</div>
+<div class="line">    {</div>
+<div class="line">        <span class="comment">// 3 phase</span></div>
+<div class="line">        <span class="comment">// 1. move on elevator</span></div>
+<div class="line">        <span class="comment">// 2. wait to reach destination</span></div>
+<div class="line">        <span class="comment">// 3. leave</span></div>
+<div class="line"> </div>
+<div class="line">        Vector2 newPos = agent.Position;</div>
+<div class="line">        <span class="keywordflow">switch</span> (state)</div>
+<div class="line">        {</div>
+<div class="line">            <span class="keywordflow">case</span> 0:</div>
+<div class="line">                Vector2 target = elevatorTrans.position;</div>
+<div class="line">                <span class="keywordflow">if</span> (agent.CurrentLink.IsTraversable &amp;&amp; Mathf.Abs(newPos.y - target.y) &lt; 0.1f)</div>
+<div class="line">                {</div>
+<div class="line">                    state = 1;</div>
+<div class="line">                    newPos.y = target.y;</div>
+<div class="line">                    direction = Vector2.right * Mathf.Sign(target.x - agent.CurrentLinkStart.x);</div>
+<div class="line">                }</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">            <span class="keywordflow">case</span> 1:</div>
+<div class="line">                newPos += agent.movementSpeed * direction * Time.deltaTime;</div>
+<div class="line"> </div>
+<div class="line">                <span class="keywordtype">float</span> targetX = agent.CurrentLink.GameObject.transform.position.x;</div>
+<div class="line">                <span class="keywordflow">if</span> ((newPos.x - targetX) * direction.x &gt;= 0)</div>
+<div class="line">                {</div>
+<div class="line">                    state = 2;</div>
+<div class="line">                    newPos.x = targetX;</div>
+<div class="line">                }</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">            <span class="keywordflow">case</span> 2:</div>
+<div class="line">                <span class="comment">// wait till y matches elevation</span></div>
+<div class="line">                <span class="comment">// cast ray downwards to move with platform</span></div>
+<div class="line">                <span class="keywordtype">float</span> targetY = agent.PathSubGoal.y;</div>
+<div class="line">                <span class="keywordflow">if</span> (agent.CurrentLink.IsTraversable &amp;&amp; Mathf.Abs(newPos.y - targetY) &lt; 0.1f)</div>
+<div class="line">                {</div>
+<div class="line">                    state = 3;</div>
+<div class="line">                    newPos.y = targetY;</div>
+<div class="line">                    direction = Vector2.right * Mathf.Sign(agent.PathSubGoal.x - newPos.x);</div>
+<div class="line">                    timeOnLink = 0;</div>
+<div class="line">                    timeToCompleteLink = Mathf.Abs(agent.PathSubGoal.x - newPos.x) / agent.movementSpeed;</div>
+<div class="line">                }</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">            <span class="keywordflow">case</span> 3:</div>
+<div class="line">                newPos += agent.movementSpeed * direction * Time.deltaTime;</div>
+<div class="line">                <span class="keywordflow">break</span>;</div>
+<div class="line">        }</div>
+<div class="line">        agent.Position = newPos;</div>
+<div class="line">    }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">private</span> <span class="keywordtype">void</span> Teleport(NavAgent agent)</div>
+<div class="line">    {</div>
+<div class="line">        agent.Position = agent.PathSubGoal;</div>
+<div class="line">    }</div>
+<div class="line">}</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- PageDoc -->
+<div class="ttc" id="anamespacePathBerserker2d_html"><div class="ttname"><a href="namespacePathBerserker2d.html">PathBerserker2d</a></div><div class="ttdef"><b>Definition:</b> Connector.cs:5</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20

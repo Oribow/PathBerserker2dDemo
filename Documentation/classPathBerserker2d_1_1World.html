@@ -104,9 +104,9 @@ static Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr class="memitem:a13b706f788f7801152a3ded96e9460f1"><td class="memItemLeft" align="right" valign="top">static List&lt; <a class="el" href="structPathBerserker2d_1_1NavSubsegmentPointer.html">NavSubsegmentPointer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1World.html#a13b706f788f7801152a3ded96e9460f1">BoxCast</a> (Rect rect, float rotation, float filterFromAngle, float filterToAngle)</td></tr>
 <tr class="memdesc:a13b706f788f7801152a3ded96e9460f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all segments intersecting a rotated box. Segments can additionally be filtered by angle.  <a href="classPathBerserker2d_1_1World.html#a13b706f788f7801152a3ded96e9460f1">More...</a><br /></td></tr>
 <tr class="separator:a13b706f788f7801152a3ded96e9460f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e6b3cc8200eca08ed95a2ac978825f0"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1World.html#a2e6b3cc8200eca08ed95a2ac978825f0">TryFindClosestPointTo</a> (Vector2 position, <a class="el" href="structPathBerserker2d_1_1SegmentFilter.html">SegmentFilter</a> segmentFilter, out <a class="el" href="structPathBerserker2d_1_1NavSegmentPositionPointer.html">NavSegmentPositionPointer</a> pointer)</td></tr>
-<tr class="memdesc:a2e6b3cc8200eca08ed95a2ac978825f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Similar to TryMapPoint, except it searches in a larger radius. (Distance controlled by <a class="el" href="classPathBerserker2d_1_1PathBerserker2dSettings.html#a39d841a7e8abdb7f0954eb935837cc74" title="Maximum distance to search for the nearest NavGraph position to a point. Used in functions to e....">PathBerserker2dSettings.ClosestToSegmentMaxDistance</a>) This makes this function performance heavy.  <a href="classPathBerserker2d_1_1World.html#a2e6b3cc8200eca08ed95a2ac978825f0">More...</a><br /></td></tr>
-<tr class="separator:a2e6b3cc8200eca08ed95a2ac978825f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35146dbad8d88b4df7db16af51e8cae1"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1World.html#a35146dbad8d88b4df7db16af51e8cae1">TryFindClosestPointTo</a> (Vector2 position, <a class="el" href="classPathBerserker2d_1_1NavAgent.html">NavAgent</a> segmentFilter, out <a class="el" href="structPathBerserker2d_1_1NavSegmentPositionPointer.html">NavSegmentPositionPointer</a> pointer)</td></tr>
+<tr class="memdesc:a35146dbad8d88b4df7db16af51e8cae1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Similar to TryMapPoint, except it searches in a larger radius. (Distance controlled by <a class="el" href="classPathBerserker2d_1_1PathBerserker2dSettings.html#a39d841a7e8abdb7f0954eb935837cc74" title="Maximum distance to search for the nearest NavGraph position to a point. Used in functions to e....">PathBerserker2dSettings.ClosestToSegmentMaxDistance</a>) This makes this function performance heavy.  <a href="classPathBerserker2d_1_1World.html#a35146dbad8d88b4df7db16af51e8cae1">More...</a><br /></td></tr>
+<tr class="separator:a35146dbad8d88b4df7db16af51e8cae1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Singleton managing the global NavGraph instance. </p>
@@ -201,8 +201,8 @@ static Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 
 </div>
 </div>
-<a id="a2e6b3cc8200eca08ed95a2ac978825f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e6b3cc8200eca08ed95a2ac978825f0">&#9670;&nbsp;</a></span>TryFindClosestPointTo()</h2>
+<a id="a35146dbad8d88b4df7db16af51e8cae1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35146dbad8d88b4df7db16af51e8cae1">&#9670;&nbsp;</a></span>TryFindClosestPointTo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -219,7 +219,7 @@ static Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structPathBerserker2d_1_1SegmentFilter.html">SegmentFilter</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classPathBerserker2d_1_1NavAgent.html">NavAgent</a>&#160;</td>
           <td class="paramname"><em>segmentFilter</em>, </td>
         </tr>
         <tr>

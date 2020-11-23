@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['inavlinkinstance_119',['INavLinkInstance',['../interfacePathBerserker2d_1_1INavLinkInstance.html',1,'PathBerserker2d']]]
+  ['goalwalker_132',['GoalWalker',['../classPathBerserker2d_1_1GoalWalker.html',1,'PathBerserker2d']]]
 ];

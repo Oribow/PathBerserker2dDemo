@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['pathgoal_190',['PathGoal',['../classPathBerserker2d_1_1NavAgent.html#a94d019f0c58d9512c78c04d460ee2ae7',1,'PathBerserker2d::NavAgent']]]
+  ['navtag_208',['navTag',['../classPathBerserker2d_1_1BaseNavLink.html#ac97b23a59edf0f4a41a0831bc88a5694',1,'PathBerserker2d::BaseNavLink']]],
+  ['nextsegmentnormal_209',['NextSegmentNormal',['../classPathBerserker2d_1_1NavAgent.html#ac799632674a83614c4377e7586d5aa15',1,'PathBerserker2d::NavAgent']]]
 ];

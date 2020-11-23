@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['maxslopeangle_184',['MaxSlopeAngle',['../classPathBerserker2d_1_1NavSurface.html#ad2fc36146d09c50873c86f09541e3b2f',1,'PathBerserker2d::NavSurface']]],
-  ['minsegmentlength_185',['MinSegmentLength',['../classPathBerserker2d_1_1NavSurface.html#a653213a38fd862667a1d9de15527aae4',1,'PathBerserker2d::NavSurface']]]
+  ['hasvalidposition_202',['HasValidPosition',['../classPathBerserker2d_1_1NavAgent.html#a17f40bae433cfdec51fe177492109586',1,'PathBerserker2d::NavAgent']]]
 ];

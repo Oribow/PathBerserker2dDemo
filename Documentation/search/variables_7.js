@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['smallestdistanceyoucareabout_191',['SmallestDistanceYouCareAbout',['../classPathBerserker2d_1_1NavSurface.html#af369dc49ccc36cc5d622b3739613deb9',1,'PathBerserker2d::NavSurface']]],
-  ['start_192',['start',['../classPathBerserker2d_1_1PathRequest.html#ac065bbf693cd0c2a8d44959fb6ff80aa',1,'PathBerserker2d::PathRequest']]]
+  ['pathgoal_210',['PathGoal',['../classPathBerserker2d_1_1NavAgent.html#a94d019f0c58d9512c78c04d460ee2ae7',1,'PathBerserker2d::NavAgent']]]
 ];

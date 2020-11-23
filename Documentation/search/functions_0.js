@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['boxcast_145',['BoxCast',['../classPathBerserker2d_1_1World.html#a13b706f788f7801152a3ded96e9460f1',1,'PathBerserker2d::World']]]
+  ['boxcast_158',['BoxCast',['../classPathBerserker2d_1_1PBWorld.html#a07e5ba2b66dfa52a620ac39f16dd2e72',1,'PathBerserker2d::PBWorld']]]
 ];
