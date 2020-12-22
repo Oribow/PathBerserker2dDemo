@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keepgrounded_134',['KeepGrounded',['../classPathBerserker2d_1_1KeepGrounded.html',1,'PathBerserker2d']]]
+  ['inavlinkinstance_160',['INavLinkInstance',['../interfacePathBerserker2d_1_1INavLinkInstance.html',1,'PathBerserker2d']]]
 ];

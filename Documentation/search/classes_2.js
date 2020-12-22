@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['defaultmovementhandler_128',['DefaultMovementHandler',['../classPathBerserker2d_1_1DefaultMovementHandler.html',1,'PathBerserker2d']]]
+  ['corgibasedmovement_154',['CorgiBasedMovement',['../classPathBerserker2d_1_1Corgi_1_1CorgiBasedMovement.html',1,'PathBerserker2d::Corgi']]]
 ];

@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['travelcosts_185',['TravelCosts',['../classPathBerserker2d_1_1BaseNavLink.html#af4b5eecc77325d956596d477eef4f4f9',1,'PathBerserker2d::BaseNavLink']]],
-  ['tryfindclosestpointto_186',['TryFindClosestPointTo',['../classPathBerserker2d_1_1PBWorld.html#a4b98c59ae4be6beb58154844571cd87a',1,'PathBerserker2d::PBWorld']]],
-  ['trymappoint_187',['TryMapPoint',['../classPathBerserker2d_1_1PBWorld.html#aba4643403e333828d2fee3c9749285ff',1,'PathBerserker2d.PBWorld.TryMapPoint(Vector2 position, out NavSegmentPositionPointer pointer)'],['../classPathBerserker2d_1_1PBWorld.html#aa697d31c27f1bb52c8339a0f688d9751',1,'PathBerserker2d.PBWorld.TryMapPoint(Vector2 position, NavSegmentPositionPointer pointer, out NavSegmentPositionPointer result)']]]
+  ['setgoaltostartlinktraversable_210',['SetGoalToStartLinkTraversable',['../classPathBerserker2d_1_1NavLink.html#ad2e271b2f076674419c082fc9ae934e3',1,'PathBerserker2d::NavLink']]],
+  ['setlinkstraversable_211',['SetLinksTraversable',['../classPathBerserker2d_1_1NavLinkCluster.html#a128cb50e3a2c20578e2cdeb4d47386df',1,'PathBerserker2d::NavLinkCluster']]],
+  ['setrandomdestination_212',['SetRandomDestination',['../classPathBerserker2d_1_1NavAgent.html#aabb985b704548b27938bbdd234eacc3b',1,'PathBerserker2d::NavAgent']]],
+  ['setstarttogoallinktraversable_213',['SetStartToGoalLinkTraversable',['../classPathBerserker2d_1_1NavLink.html#a42b2e4ebef72a0a8b175fe242ba6324c',1,'PathBerserker2d::NavLink']]],
+  ['stop_214',['Stop',['../classPathBerserker2d_1_1NavAgent.html#a36b77d1ce70d570572f6744821c8f00f',1,'PathBerserker2d::NavAgent']]],
+  ['stoppropagation_215',['StopPropagation',['../classPathBerserker2d_1_1MovementEventArgs.html#a983663209edeb7c6be017b1b3ba95ac4',1,'PathBerserker2d::MovementEventArgs']]]
 ];

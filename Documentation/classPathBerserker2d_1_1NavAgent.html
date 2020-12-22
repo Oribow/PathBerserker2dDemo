@@ -116,6 +116,9 @@ delegate void&#160;</td><td class="memItemRight" valign="bottom"><b>FailedToFind
 <tr class="memitem:abae46f8648127dda20e66c040208eac3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#abae46f8648127dda20e66c040208eac3">UpdatePath</a> (Vector2 goal)</td></tr>
 <tr class="memdesc:abae46f8648127dda20e66c040208eac3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the process of pathfinding to the given goal. Will continue moving until the calculations for the new path are completed. NOTE: Do not call this method every frame. Calculating a path takes longer than a frame, so the agent will never start moving.  <a href="classPathBerserker2d_1_1NavAgent.html#abae46f8648127dda20e66c040208eac3">More...</a><br /></td></tr>
 <tr class="separator:abae46f8648127dda20e66c040208eac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55979da5fcb645dbf2ac1c91c8e35e0c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#a55979da5fcb645dbf2ac1c91c8e35e0c">HasReachedCurrentSubGoal</a> (float maxDist=0.05f)</td></tr>
+<tr class="memdesc:a55979da5fcb645dbf2ac1c91c8e35e0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple distance check between agent and CurrentSubGoal.  <a href="classPathBerserker2d_1_1NavAgent.html#a55979da5fcb645dbf2ac1c91c8e35e0c">More...</a><br /></td></tr>
+<tr class="separator:a55979da5fcb645dbf2ac1c91c8e35e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aabb985b704548b27938bbdd234eacc3b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#aabb985b704548b27938bbdd234eacc3b">SetRandomDestination</a> ()</td></tr>
 <tr class="memdesc:aabb985b704548b27938bbdd234eacc3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start pathfinding to a random position on the NavGraph. It cannot grantee that this position is reachable. Does the agent might not move after this is called.  <a href="classPathBerserker2d_1_1NavAgent.html#aabb985b704548b27938bbdd234eacc3b">More...</a><br /></td></tr>
 <tr class="separator:aabb985b704548b27938bbdd234eacc3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -209,30 +212,21 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsWaitingForLink</b> 
 <tr class="memitem:a05c779bafa18c60f9f38d1ed25f3dbe4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#a05c779bafa18c60f9f38d1ed25f3dbe4">CurrentNavTagVector</a> =&gt; IsFollowingAPath ? currentPath.CurrentSegment.GetTagVector(<a class="el" href="classPathBerserker2d_1_1NavAgent.html#a8ac00ce2dc19dcd49fed3aa4f8b70f30">Position</a>) : (currentMappedPosition.cluster?.GetNavTagVector(currentMappedPosition.t) ?? 0)</td></tr>
 <tr class="memdesc:a05c779bafa18c60f9f38d1ed25f3dbe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Combination of all NavTags at the position of the agent.  <a href="classPathBerserker2d_1_1NavAgent.html#a05c779bafa18c60f9f38d1ed25f3dbe4">More...</a><br /></td></tr>
 <tr class="separator:a05c779bafa18c60f9f38d1ed25f3dbe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad78e2dea0d93f01a787ed32c3372923a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#ad78e2dea0d93f01a787ed32c3372923a">autoSegmentMovement</a> = true</td></tr>
-<tr class="memdesc:ad78e2dea0d93f01a787ed32c3372923a"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, the agent will automatically traverse segments.  <a href="classPathBerserker2d_1_1NavAgent.html#ad78e2dea0d93f01a787ed32c3372923a">More...</a><br /></td></tr>
-<tr class="separator:ad78e2dea0d93f01a787ed32c3372923a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a788c3b2d53a311857e0bd6f8df55b78a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#a788c3b2d53a311857e0bd6f8df55b78a">autoLinkMovement</a> = true</td></tr>
-<tr class="memdesc:a788c3b2d53a311857e0bd6f8df55b78a"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, the agent will automatically traverse links.  <a href="classPathBerserker2d_1_1NavAgent.html#a788c3b2d53a311857e0bd6f8df55b78a">More...</a><br /></td></tr>
-<tr class="separator:a788c3b2d53a311857e0bd6f8df55b78a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3f32e079f74f67e70ed940484e40813"><td class="memItemLeft" align="right" valign="top"><a id="aa3f32e079f74f67e70ed940484e40813"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>movementSpeed</b> = 5</td></tr>
+<tr class="memitem:aa3f32e079f74f67e70ed940484e40813"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#aa3f32e079f74f67e70ed940484e40813">movementSpeed</a> = 5</td></tr>
+<tr class="memdesc:aa3f32e079f74f67e70ed940484e40813"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obsolete  <a href="classPathBerserker2d_1_1NavAgent.html#aa3f32e079f74f67e70ed940484e40813">More...</a><br /></td></tr>
 <tr class="separator:aa3f32e079f74f67e70ed940484e40813"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48d4dada3a967643aa8b171252e7a7fa"><td class="memItemLeft" align="right" valign="top"><a id="a48d4dada3a967643aa8b171252e7a7fa"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>cornerSpeed</b> = 100</td></tr>
+<tr class="memitem:a48d4dada3a967643aa8b171252e7a7fa"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#a48d4dada3a967643aa8b171252e7a7fa">cornerSpeed</a> = 100</td></tr>
+<tr class="memdesc:a48d4dada3a967643aa8b171252e7a7fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obsolete  <a href="classPathBerserker2d_1_1NavAgent.html#a48d4dada3a967643aa8b171252e7a7fa">More...</a><br /></td></tr>
 <tr class="separator:a48d4dada3a967643aa8b171252e7a7fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c03e91d0d2a286da3aeaecf7b359b12"><td class="memItemLeft" align="right" valign="top"><a id="a4c03e91d0d2a286da3aeaecf7b359b12"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>jumpSpeed</b> = 5</td></tr>
+<tr class="memitem:a4c03e91d0d2a286da3aeaecf7b359b12"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#a4c03e91d0d2a286da3aeaecf7b359b12">jumpSpeed</a> = 5</td></tr>
+<tr class="memdesc:a4c03e91d0d2a286da3aeaecf7b359b12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obsolete  <a href="classPathBerserker2d_1_1NavAgent.html#a4c03e91d0d2a286da3aeaecf7b359b12">More...</a><br /></td></tr>
 <tr class="separator:a4c03e91d0d2a286da3aeaecf7b359b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6782faeaa0693411e9bdc64a88078ce0"><td class="memItemLeft" align="right" valign="top"><a id="a6782faeaa0693411e9bdc64a88078ce0"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>fallSpeed</b> = 5</td></tr>
+<tr class="memitem:a6782faeaa0693411e9bdc64a88078ce0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#a6782faeaa0693411e9bdc64a88078ce0">fallSpeed</a> = 5</td></tr>
+<tr class="memdesc:a6782faeaa0693411e9bdc64a88078ce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obsolete  <a href="classPathBerserker2d_1_1NavAgent.html#a6782faeaa0693411e9bdc64a88078ce0">More...</a><br /></td></tr>
 <tr class="separator:a6782faeaa0693411e9bdc64a88078ce0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45008e0afed6a8954e65aea70cadb37e"><td class="memItemLeft" align="right" valign="top"><a id="a45008e0afed6a8954e65aea70cadb37e"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>climbSpeed</b> = 5</td></tr>
+<tr class="memitem:a45008e0afed6a8954e65aea70cadb37e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#a45008e0afed6a8954e65aea70cadb37e">climbSpeed</a> = 5</td></tr>
+<tr class="memdesc:a45008e0afed6a8954e65aea70cadb37e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obsolete  <a href="classPathBerserker2d_1_1NavAgent.html#a45008e0afed6a8954e65aea70cadb37e">More...</a><br /></td></tr>
 <tr class="separator:a45008e0afed6a8954e65aea70cadb37e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56f8d1bf42b293072e0534fdef4ac66b"><td class="memItemLeft" align="right" valign="top"><a id="a56f8d1bf42b293072e0534fdef4ac66b"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>enableAgentRotation</b> = true</td></tr>
-<tr class="separator:a56f8d1bf42b293072e0534fdef4ac66b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
@@ -249,20 +243,26 @@ Properties</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="events"></a>
 Events</h2></td></tr>
 <tr class="memitem:ab3bd2002606baaa3974e7f196f819a5e"><td class="memItemLeft" align="right" valign="top">Action&lt; <a class="el" href="classPathBerserker2d_1_1NavAgent.html">NavAgent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#ab3bd2002606baaa3974e7f196f819a5e">OnStartLinkTraversal</a></td></tr>
-<tr class="memdesc:ab3bd2002606baaa3974e7f196f819a5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when agent begins moving on a link.  <a href="classPathBerserker2d_1_1NavAgent.html#ab3bd2002606baaa3974e7f196f819a5e">More...</a><br /></td></tr>
+<tr class="memdesc:ab3bd2002606baaa3974e7f196f819a5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fired when agent begins moving on a link.  <a href="classPathBerserker2d_1_1NavAgent.html#ab3bd2002606baaa3974e7f196f819a5e">More...</a><br /></td></tr>
 <tr class="separator:ab3bd2002606baaa3974e7f196f819a5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a532be8099cffe4c1dcd80eec1de3ba0f"><td class="memItemLeft" align="right" valign="top">Action&lt; <a class="el" href="classPathBerserker2d_1_1MovementEventArgs.html">MovementEventArgs</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#a532be8099cffe4c1dcd80eec1de3ba0f">OnLinkTraversal</a></td></tr>
-<tr class="memdesc:a532be8099cffe4c1dcd80eec1de3ba0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when agent is moving on a link.  <a href="classPathBerserker2d_1_1NavAgent.html#a532be8099cffe4c1dcd80eec1de3ba0f">More...</a><br /></td></tr>
-<tr class="separator:a532be8099cffe4c1dcd80eec1de3ba0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad339496a4c257e736215b0d9bf0170a1"><td class="memItemLeft" align="right" valign="top">Action&lt; <a class="el" href="classPathBerserker2d_1_1NavAgent.html">NavAgent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#ad339496a4c257e736215b0d9bf0170a1">OnLinkTraversal</a></td></tr>
+<tr class="memdesc:ad339496a4c257e736215b0d9bf0170a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fired when agent is moving on a link.  <a href="classPathBerserker2d_1_1NavAgent.html#ad339496a4c257e736215b0d9bf0170a1">More...</a><br /></td></tr>
+<tr class="separator:ad339496a4c257e736215b0d9bf0170a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05636327b0021b0ce20d347bc6472c31"><td class="memItemLeft" align="right" valign="top">Action&lt; <a class="el" href="classPathBerserker2d_1_1NavAgent.html">NavAgent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#a05636327b0021b0ce20d347bc6472c31">OnStartSegmentTraversal</a></td></tr>
-<tr class="memdesc:a05636327b0021b0ce20d347bc6472c31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when agent start moving on a segment.  <a href="classPathBerserker2d_1_1NavAgent.html#a05636327b0021b0ce20d347bc6472c31">More...</a><br /></td></tr>
+<tr class="memdesc:a05636327b0021b0ce20d347bc6472c31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fired when agent start moving on a segment.  <a href="classPathBerserker2d_1_1NavAgent.html#a05636327b0021b0ce20d347bc6472c31">More...</a><br /></td></tr>
 <tr class="separator:a05636327b0021b0ce20d347bc6472c31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:affa6e95cce3d15edfed637c20a55b925"><td class="memItemLeft" align="right" valign="top">Action&lt; <a class="el" href="classPathBerserker2d_1_1MovementEventArgs.html">MovementEventArgs</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#affa6e95cce3d15edfed637c20a55b925">OnSegmentTraversal</a></td></tr>
-<tr class="memdesc:affa6e95cce3d15edfed637c20a55b925"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when agent is moving on a link.  <a href="classPathBerserker2d_1_1NavAgent.html#affa6e95cce3d15edfed637c20a55b925">More...</a><br /></td></tr>
-<tr class="separator:affa6e95cce3d15edfed637c20a55b925"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45eed01e0bdc2feb56b840b09df8c7bf"><td class="memItemLeft" align="right" valign="top">Action&lt; <a class="el" href="classPathBerserker2d_1_1NavAgent.html">NavAgent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#a45eed01e0bdc2feb56b840b09df8c7bf">OnSegmentTraversal</a></td></tr>
+<tr class="memdesc:a45eed01e0bdc2feb56b840b09df8c7bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fired when agent is moving on a link.  <a href="classPathBerserker2d_1_1NavAgent.html#a45eed01e0bdc2feb56b840b09df8c7bf">More...</a><br /></td></tr>
+<tr class="separator:a45eed01e0bdc2feb56b840b09df8c7bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aacfa5b9916e9f5303a843057aec8b2f6"><td class="memItemLeft" align="right" valign="top">Action&lt; <a class="el" href="classPathBerserker2d_1_1NavAgent.html">NavAgent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#aacfa5b9916e9f5303a843057aec8b2f6">OnFailedToFindPath</a></td></tr>
-<tr class="memdesc:aacfa5b9916e9f5303a843057aec8b2f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the agent fails to find a path  <a href="classPathBerserker2d_1_1NavAgent.html#aacfa5b9916e9f5303a843057aec8b2f6">More...</a><br /></td></tr>
+<tr class="memdesc:aacfa5b9916e9f5303a843057aec8b2f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fired when the agent fails to find a path  <a href="classPathBerserker2d_1_1NavAgent.html#aacfa5b9916e9f5303a843057aec8b2f6">More...</a><br /></td></tr>
 <tr class="separator:aacfa5b9916e9f5303a843057aec8b2f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3637daa457ce539a487cbc42accce8a0"><td class="memItemLeft" align="right" valign="top">Action&lt; <a class="el" href="classPathBerserker2d_1_1NavAgent.html">NavAgent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#a3637daa457ce539a487cbc42accce8a0">OnStop</a></td></tr>
+<tr class="memdesc:a3637daa457ce539a487cbc42accce8a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fired when agent stops after <a class="el" href="classPathBerserker2d_1_1NavAgent.html#a36b77d1ce70d570572f6744821c8f00f" title="Stops the current path following at the first opportunity. Link traversal will be completed before th...">Stop()</a> or <a class="el" href="classPathBerserker2d_1_1NavAgent.html#adbb2adbffcd995c47d174694e5c83bcb" title="Stops the current path following instantly. Agent might stop wihle traversing a link (e....">ForceStop()</a> was called. For <a class="el" href="classPathBerserker2d_1_1NavAgent.html#adbb2adbffcd995c47d174694e5c83bcb" title="Stops the current path following instantly. Agent might stop wihle traversing a link (e....">ForceStop()</a> this happens instantly. For <a class="el" href="classPathBerserker2d_1_1NavAgent.html#a36b77d1ce70d570572f6744821c8f00f" title="Stops the current path following at the first opportunity. Link traversal will be completed before th...">Stop()</a> this happens after the agent stopped.  <a href="classPathBerserker2d_1_1NavAgent.html#a3637daa457ce539a487cbc42accce8a0">More...</a><br /></td></tr>
+<tr class="separator:a3637daa457ce539a487cbc42accce8a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7f68832941dbecd289f2d73e8c1893e"><td class="memItemLeft" align="right" valign="top">Action&lt; <a class="el" href="classPathBerserker2d_1_1NavAgent.html">NavAgent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#aa7f68832941dbecd289f2d73e8c1893e">OnReachedGoal</a></td></tr>
+<tr class="memdesc:aa7f68832941dbecd289f2d73e8c1893e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fired when agent reaches its current goal.  <a href="classPathBerserker2d_1_1NavAgent.html#aa7f68832941dbecd289f2d73e8c1893e">More...</a><br /></td></tr>
+<tr class="separator:aa7f68832941dbecd289f2d73e8c1893e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5d3c4b15e40d0cc7c0eedfdea971984"><td class="memItemLeft" align="right" valign="top">Action&lt; <a class="el" href="classPathBerserker2d_1_1NavAgent.html">NavAgent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavAgent.html#ac5d3c4b15e40d0cc7c0eedfdea971984">OnStartFollowingNewPath</a></td></tr>
 <tr class="memdesc:ac5d3c4b15e40d0cc7c0eedfdea971984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the agent starts following a new path. NOTE: Also called, after successfully recalculating a path, even if the path itself does not change.  <a href="classPathBerserker2d_1_1NavAgent.html#ac5d3c4b15e40d0cc7c0eedfdea971984">More...</a><br /></td></tr>
 <tr class="separator:ac5d3c4b15e40d0cc7c0eedfdea971984"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -281,7 +281,7 @@ States</h2>
   The agent has made a <a class="el" href="classPathBerserker2d_1_1PathRequest.html">path request</a> and is now waiting for its result. A call to <a class="el" href="classPathBerserker2d_1_1NavAgent.html#af7daace9ac74fb3bd2230606433ac349" title="Starts the process of pathfinding to the closest of the given goals. NOTE: Do not call this method ev...">PathTo</a> for example would make the agent switch to this state. If the path calculation succeeded, the agent switches into the <code>FollowPath</code> state. If it didn't succeed however, the agent will switch back into the <code>Idle</code> state.   </li>
 <li>
 <p class="startli"><code>FollowPath</code><br  />
-  The agent will follow the a previously calculated path. Depending on whether <a class="el" href="classPathBerserker2d_1_1NavAgent.html#ad78e2dea0d93f01a787ed32c3372923a" title="If true, the agent will automatically traverse segments.">autoSegmentMovement</a> or <a class="el" href="classPathBerserker2d_1_1NavAgent.html#a788c3b2d53a311857e0bd6f8df55b78a" title="If true, the agent will automatically traverse links.">autoLinkMovement</a> is set, the path will be followed automatically. The agent has build-in ways to traverse the build-in link types. They don't make use of the physics system. The path will be recalculated at a set interval determined by autoRepathIntervall. This is to ensure the path is up to date with changes in the world. No reactions to changes in the world between recalculations is possible.</p>
+  The agent will follow the a previously calculated path. Depending on whether autoSegmentMovement or autoLinkMovement is set, the path will be followed automatically. The agent has build-in ways to traverse the build-in link types. They don't make use of the physics system. The path will be recalculated at a set interval determined by autoRepathIntervall. This is to ensure the path is up to date with changes in the world. No reactions to changes in the world between recalculations is possible.</p>
 <p class="endli">Following a path is further subdivided into three states: </p><ul>
 <li>
 <code>Segment movement</code><br  />
@@ -458,6 +458,27 @@ navTagTraversalCostMultipliers<br  />
 </div><div class="memdoc">
 
 <p>Get the traversal cost multiplier for a given nav tag. </p>
+
+</div>
+</div>
+<a id="a55979da5fcb645dbf2ac1c91c8e35e0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55979da5fcb645dbf2ac1c91c8e35e0c">&#9670;&nbsp;</a></span>HasReachedCurrentSubGoal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PathBerserker2d.NavAgent.HasReachedCurrentSubGoal </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>maxDist</em> = <code>0.05f</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Simple distance check between agent and CurrentSubGoal. </p>
+<dl class="section return"><dt>Returns</dt><dd>True, if distance is less than maxDist</dd></dl>
 
 </div>
 </div>
@@ -699,35 +720,35 @@ navTagTraversalCostMultipliers<br  />
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a788c3b2d53a311857e0bd6f8df55b78a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a788c3b2d53a311857e0bd6f8df55b78a">&#9670;&nbsp;</a></span>autoLinkMovement</h2>
+<a id="a45008e0afed6a8954e65aea70cadb37e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45008e0afed6a8954e65aea70cadb37e">&#9670;&nbsp;</a></span>climbSpeed</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool PathBerserker2d.NavAgent.autoLinkMovement = true</td>
+          <td class="memname">float PathBerserker2d.NavAgent.climbSpeed = 5</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>If true, the agent will automatically traverse links. </p>
+<p>Obsolete </p>
 
 </div>
 </div>
-<a id="ad78e2dea0d93f01a787ed32c3372923a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad78e2dea0d93f01a787ed32c3372923a">&#9670;&nbsp;</a></span>autoSegmentMovement</h2>
+<a id="a48d4dada3a967643aa8b171252e7a7fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48d4dada3a967643aa8b171252e7a7fa">&#9670;&nbsp;</a></span>cornerSpeed</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool PathBerserker2d.NavAgent.autoSegmentMovement = true</td>
+          <td class="memname">float PathBerserker2d.NavAgent.cornerSpeed = 100</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>If true, the agent will automatically traverse segments. </p>
+<p>Obsolete </p>
 
 </div>
 </div>
@@ -811,6 +832,22 @@ navTagTraversalCostMultipliers<br  />
 
 </div>
 </div>
+<a id="a6782faeaa0693411e9bdc64a88078ce0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6782faeaa0693411e9bdc64a88078ce0">&#9670;&nbsp;</a></span>fallSpeed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float PathBerserker2d.NavAgent.fallSpeed = 5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obsolete </p>
+
+</div>
+</div>
 <a id="a17f40bae433cfdec51fe177492109586"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a17f40bae433cfdec51fe177492109586">&#9670;&nbsp;</a></span>HasValidPosition</h2>
 
@@ -872,6 +909,38 @@ navTagTraversalCostMultipliers<br  />
 </div><div class="memdoc">
 
 <p>True, if <a class="el" href="classPathBerserker2d_1_1NavAgent.html#a36b77d1ce70d570572f6744821c8f00f" title="Stops the current path following at the first opportunity. Link traversal will be completed before th...">Stop()</a> was called and agent hasn't yet stopped </p>
+
+</div>
+</div>
+<a id="a4c03e91d0d2a286da3aeaecf7b359b12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c03e91d0d2a286da3aeaecf7b359b12">&#9670;&nbsp;</a></span>jumpSpeed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float PathBerserker2d.NavAgent.jumpSpeed = 5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obsolete </p>
+
+</div>
+</div>
+<a id="aa3f32e079f74f67e70ed940484e40813"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3f32e079f74f67e70ed940484e40813">&#9670;&nbsp;</a></span>movementSpeed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float PathBerserker2d.NavAgent.movementSpeed = 5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obsolete </p>
 
 </div>
 </div>
@@ -993,39 +1062,55 @@ navTagTraversalCostMultipliers<br  />
       </table>
 </div><div class="memdoc">
 
-<p>Called when the agent fails to find a path </p>
+<p>Fired when the agent fails to find a path </p>
 
 </div>
 </div>
-<a id="a532be8099cffe4c1dcd80eec1de3ba0f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a532be8099cffe4c1dcd80eec1de3ba0f">&#9670;&nbsp;</a></span>OnLinkTraversal</h2>
+<a id="ad339496a4c257e736215b0d9bf0170a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad339496a4c257e736215b0d9bf0170a1">&#9670;&nbsp;</a></span>OnLinkTraversal</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Action&lt;<a class="el" href="classPathBerserker2d_1_1MovementEventArgs.html">MovementEventArgs</a>&gt; PathBerserker2d.NavAgent.OnLinkTraversal</td>
+          <td class="memname">Action&lt;<a class="el" href="classPathBerserker2d_1_1NavAgent.html">NavAgent</a>&gt; PathBerserker2d.NavAgent.OnLinkTraversal</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Called when agent is moving on a link. </p>
+<p>Fired when agent is moving on a link. </p>
 
 </div>
 </div>
-<a id="affa6e95cce3d15edfed637c20a55b925"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#affa6e95cce3d15edfed637c20a55b925">&#9670;&nbsp;</a></span>OnSegmentTraversal</h2>
+<a id="aa7f68832941dbecd289f2d73e8c1893e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7f68832941dbecd289f2d73e8c1893e">&#9670;&nbsp;</a></span>OnReachedGoal</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Action&lt;<a class="el" href="classPathBerserker2d_1_1MovementEventArgs.html">MovementEventArgs</a>&gt; PathBerserker2d.NavAgent.OnSegmentTraversal</td>
+          <td class="memname">Action&lt;<a class="el" href="classPathBerserker2d_1_1NavAgent.html">NavAgent</a>&gt; PathBerserker2d.NavAgent.OnReachedGoal</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Called when agent is moving on a link. </p>
+<p>Fired when agent reaches its current goal. </p>
+
+</div>
+</div>
+<a id="a45eed01e0bdc2feb56b840b09df8c7bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45eed01e0bdc2feb56b840b09df8c7bf">&#9670;&nbsp;</a></span>OnSegmentTraversal</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Action&lt;<a class="el" href="classPathBerserker2d_1_1NavAgent.html">NavAgent</a>&gt; PathBerserker2d.NavAgent.OnSegmentTraversal</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fired when agent is moving on a link. </p>
 
 </div>
 </div>
@@ -1057,7 +1142,7 @@ navTagTraversalCostMultipliers<br  />
       </table>
 </div><div class="memdoc">
 
-<p>Called when agent begins moving on a link. </p>
+<p>Fired when agent begins moving on a link. </p>
 
 </div>
 </div>
@@ -1073,7 +1158,23 @@ navTagTraversalCostMultipliers<br  />
       </table>
 </div><div class="memdoc">
 
-<p>Called when agent start moving on a segment. </p>
+<p>Fired when agent start moving on a segment. </p>
+
+</div>
+</div>
+<a id="a3637daa457ce539a487cbc42accce8a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3637daa457ce539a487cbc42accce8a0">&#9670;&nbsp;</a></span>OnStop</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Action&lt;<a class="el" href="classPathBerserker2d_1_1NavAgent.html">NavAgent</a>&gt; PathBerserker2d.NavAgent.OnStop</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fired when agent stops after <a class="el" href="classPathBerserker2d_1_1NavAgent.html#a36b77d1ce70d570572f6744821c8f00f" title="Stops the current path following at the first opportunity. Link traversal will be completed before th...">Stop()</a> or <a class="el" href="classPathBerserker2d_1_1NavAgent.html#adbb2adbffcd995c47d174694e5c83bcb" title="Stops the current path following instantly. Agent might stop wihle traversing a link (e....">ForceStop()</a> was called. For <a class="el" href="classPathBerserker2d_1_1NavAgent.html#adbb2adbffcd995c47d174694e5c83bcb" title="Stops the current path following instantly. Agent might stop wihle traversing a link (e....">ForceStop()</a> this happens instantly. For <a class="el" href="classPathBerserker2d_1_1NavAgent.html#a36b77d1ce70d570572f6744821c8f00f" title="Stops the current path following at the first opportunity. Link traversal will be completed before th...">Stop()</a> this happens after the agent stopped. </p>
 
 </div>
 </div>

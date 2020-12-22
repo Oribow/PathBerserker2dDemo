@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['randomwalker_155',['RandomWalker',['../classPathBerserker2d_1_1RandomWalker.html',1,'PathBerserker2d']]]
+  ['queryenumerator_181',['QueryEnumerator',['../structPathBerserker2d_1_1B2DynamicTree_1_1QueryEnumerator.html',1,'PathBerserker2d::B2DynamicTree']]]
 ];
