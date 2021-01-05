@@ -101,6 +101,9 @@ Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>WorldToLocal</b> (
 <tr class="memitem:a5fcd36fbd37a5751443acdfa693c400a"><td class="memItemLeft" align="right" valign="top"><a id="a5fcd36fbd37a5751443acdfa693c400a"></a>
 Matrix4x4&#160;</td><td class="memItemRight" valign="bottom"><b>WorldToLocalMatrix</b> ()</td></tr>
 <tr class="separator:a5fcd36fbd37a5751443acdfa693c400a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c00745978a80dfeffe30fc62abca07e"><td class="memItemLeft" align="right" valign="top">IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPathBerserker2d_1_1NavSurface.html#a6c00745978a80dfeffe30fc62abca07e">Bake</a> ()</td></tr>
+<tr class="memdesc:a6c00745978a80dfeffe30fc62abca07e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates <a class="el" href="classPathBerserker2d_1_1NavSurface.html" title="A collection of line segments to traverse on.">NavSurface</a> baked data. Baking largely runs in a different thread. This function should be run as a Coroutine. <a class="el" href="classPathBerserker2d_1_1NavSurface.html" title="A collection of line segments to traverse on.">NavSurface</a> will be removed from World first and added back, when baking is completed. Calling this function before the previous bake job completed, will abort the previous job.  <a href="classPathBerserker2d_1_1NavSurface.html#a6c00745978a80dfeffe30fc62abca07e">More...</a><br /></td></tr>
+<tr class="separator:a6c00745978a80dfeffe30fc62abca07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -145,7 +148,27 @@ Baking</h2>
 Transformations</h2>
 <p>All baked postion data is relative to the current <a class="el" href="classPathBerserker2d_1_1NavSurface.html" title="A collection of line segments to traverse on.">NavSurface</a> position. Only to the position though, not to it's rotation or scale. This allows NavSurfaces to be moved at runtime, without requiring a rebake. Segments in calculated paths remain relative to the <a class="el" href="classPathBerserker2d_1_1NavSurface.html" title="A collection of line segments to traverse on.">NavSurface</a> of origin. If you pathfind on a <a class="el" href="classPathBerserker2d_1_1NavSurface.html" title="A collection of line segments to traverse on.">NavSurface</a> and then move it, the path will reflect that transformation.</p>
 <p>See also <a class="el" href="core_concepts.html#cc_navagent">Core concepts: NavAgent</a>. </p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6c00745978a80dfeffe30fc62abca07e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c00745978a80dfeffe30fc62abca07e">&#9670;&nbsp;</a></span>Bake()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IEnumerator PathBerserker2d.NavSurface.Bake </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates <a class="el" href="classPathBerserker2d_1_1NavSurface.html" title="A collection of line segments to traverse on.">NavSurface</a> baked data. Baking largely runs in a different thread. This function should be run as a Coroutine. <a class="el" href="classPathBerserker2d_1_1NavSurface.html" title="A collection of line segments to traverse on.">NavSurface</a> will be removed from World first and added back, when baking is completed. Calling this function before the previous bake job completed, will abort the previous job. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
 <a id="ad2fc36146d09c50873c86f09541e3b2f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad2fc36146d09c50873c86f09541e3b2f">&#9670;&nbsp;</a></span>MaxSlopeAngle</h2>
 
